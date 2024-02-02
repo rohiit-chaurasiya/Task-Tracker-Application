@@ -30,28 +30,28 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER')")
     @PostMapping
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto) {
        TodoDto savedTodo = todoService.addTodo(todoDto);
        return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("{id}")
     public ResponseEntity<TodoDto> getTodo(@PathVariable("id") Long todoId) {
        TodoDto todoDto = todoService.getTodo(todoId);
        return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos() {
        List<TodoDto> todoDtoList = todoService.getAllTodos();
        return new ResponseEntity<>(todoDtoList, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER')")
     @PutMapping("{id}")
     public ResponseEntity<TodoDto> updateTodo(@RequestBody TodoDto todoDto,
                                               @PathVariable("id") Long todoId) {
@@ -59,21 +59,21 @@ public class TodoController {
        return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN','ROLE_USER')")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteTodo(@PathVariable("id") Long todoId) {
         todoService.deleteTodo(todoId);
         return new ResponseEntity<>("Todo deleted successfully", HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PatchMapping("{id}/complete")
     public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long todoId) {
        TodoDto todoDto = todoService.completeTodo(todoId);
        return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
     @PatchMapping("{id}/incomplete")
     public ResponseEntity<TodoDto> inCompleteTodo(@PathVariable("id") Long todoId){
        TodoDto todoDto = todoService.inCompleteTodo(todoId);
