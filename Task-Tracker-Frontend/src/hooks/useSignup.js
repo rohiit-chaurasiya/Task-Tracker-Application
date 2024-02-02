@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { registerAPICall } from "../services/AuthService";
+import { useNavigate } from "react-router-dom";
+
 
 const useSignup = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -18,6 +22,7 @@ const useSignup = () => {
     try {
       await registerAPICall(register);
       console.log("Successfully Registered");
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
